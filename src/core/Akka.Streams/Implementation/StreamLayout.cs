@@ -1614,7 +1614,7 @@ namespace Akka.Streams.Implementation
         private static void PrintDebug(string msg)
         {
             if(IsDebug)
-                Console.WriteLine(msg);
+                System.Diagnostics.Debug.WriteLine(msg);
         }
         
         /// <summary>
@@ -2215,7 +2215,7 @@ namespace Akka.Streams.Implementation
         public void RegisterPublisher(IPublisher<T> publisher)
         {
             if(VirtualProcessor<T>.IsDebug)
-                Console.WriteLine($"{this}.RegisterPublisher({publisher})");
+                System.Diagnostics.Debug.WriteLine($"{this}.RegisterPublisher({publisher})");
             while (true)
             {
                 if (Value == null)
@@ -2333,7 +2333,7 @@ namespace Akka.Streams.Implementation
         protected void EnterScope(CopiedModule enclosing)
         {
             if(IsDebug)
-                Console.WriteLine($"entering scope [{GetHashCode()}%08x]");
+                System.Diagnostics.Debug.WriteLine($"entering scope [{GetHashCode()}%08x]");
             _subscribersStack.AddFirst(new Dictionary<InPort, object>());
             _publishersStack.AddFirst(new Dictionary<OutPort, IUntypedPublisher>());
             _materializedValueSources.AddFirst(new Dictionary<StreamLayout.IMaterializedValueNode, LinkedList<IMaterializedValueSource>>());
@@ -2358,7 +2358,7 @@ namespace Akka.Streams.Implementation
             _moduleStack.RemoveFirst();
 
             if(IsDebug)
-                Console.WriteLine($"   subscribers = {scopeSubscribers}\n publishers = {scopePublishers}");
+                System.Diagnostics.Debug.WriteLine($"   subscribers = {scopeSubscribers}\n publishers = {scopePublishers}");
 
             // When we exit the scope of a copied module,  pick up the Subscribers/Publishers belonging to exposed ports of
             // the original module and assign them to the copy ports in the outer scope that we will return to
@@ -2383,7 +2383,7 @@ namespace Akka.Streams.Implementation
         public object Materialize()
         {
             if(IsDebug)
-                Console.WriteLine($"beginning materialization of {TopLevel}");
+                System.Diagnostics.Debug.WriteLine($"beginning materialization of {TopLevel}");
 
             if (TopLevel is EmptyModule)
                 throw new InvalidOperationException("An empty module cannot be materialized (EmptyModule was given)");
@@ -2453,7 +2453,7 @@ namespace Akka.Streams.Implementation
         /// <param name="materializedSource">TBD</param>
         protected void RegisterSource(IMaterializedValueSource materializedSource)
         {
-            if (IsDebug) Console.WriteLine($"Registering source {materializedSource}");
+            if (IsDebug) System.Diagnostics.Debug.WriteLine($"Registering source {materializedSource}");
 
             if (MaterializedValueSource.TryGetValue(materializedSource.Computation, out var list))
                 list.AddFirst(materializedSource);
@@ -2473,7 +2473,7 @@ namespace Akka.Streams.Implementation
             var materializedValues = new Dictionary<IModule, object>();
 
             if(IsDebug)
-                Console.WriteLine($"entering module {module.GetHashCode()}%08x] ({module.GetType().Name})");
+                System.Diagnostics.Debug.WriteLine($"entering module {module.GetHashCode()}%08x] ({module.GetType().Name})");
 
             foreach (var submodule in module.SubModules)
             {
@@ -2497,9 +2497,9 @@ namespace Akka.Streams.Implementation
 
             if (IsDebug)
             {
-                Console.WriteLine($"resolving module [{module.GetHashCode()}%08x] computation {module.MaterializedValueComputation}");
-                Console.WriteLine($"  matValSrc = {MaterializedValueSource}");
-                Console.WriteLine($"  matVals = {materializedValues}");
+                System.Diagnostics.Debug.WriteLine($"resolving module [{module.GetHashCode()}%08x] computation {module.MaterializedValueComputation}");
+                System.Diagnostics.Debug.WriteLine($"  matValSrc = {MaterializedValueSource}");
+                System.Diagnostics.Debug.WriteLine($"  matVals = {materializedValues}");
             }
 
             var resolved = ResolveMaterialized(module.MaterializedValueComputation, materializedValues, 2);
@@ -2507,11 +2507,11 @@ namespace Akka.Streams.Implementation
             {
                 var node = MaterializedValueSource.Keys.First();
                 if(IsDebug)
-                    Console.WriteLine($"  delayed computation of {node}");
+                    System.Diagnostics.Debug.WriteLine($"  delayed computation of {node}");
                 ResolveMaterialized(node, materializedValues, 4);
             }
             if(IsDebug)
-                Console.WriteLine($"exiting module [{module.GetHashCode()}%08x]");
+                System.Diagnostics.Debug.WriteLine($"exiting module [{module.GetHashCode()}%08x]");
             return resolved;
         }
 
@@ -2539,7 +2539,7 @@ namespace Akka.Streams.Implementation
         {
             var indent = Enumerable.Repeat(" ", spaces).Aggregate("", (s, s1) => s + s1);
             if (IsDebug)
-                Console.WriteLine($"{indent}{node}");
+                System.Diagnostics.Debug.WriteLine($"{indent}{node}");
             object result;
             if (node is StreamLayout.Atomic)
             {
@@ -2561,12 +2561,12 @@ namespace Akka.Streams.Implementation
                 result = NotUsed.Instance;
 
             if (IsDebug)
-                Console.WriteLine($"{indent}result = {result}");
+                System.Diagnostics.Debug.WriteLine($"{indent}result = {result}");
 
             if (MaterializedValueSource.TryGetValue(node, out var sources))
             {
                 if (IsDebug)
-                    Console.WriteLine($"{indent}triggering sources {sources}");
+                    System.Diagnostics.Debug.WriteLine($"{indent}triggering sources {sources}");
                 MaterializedValueSource.Remove(node);
                 foreach (var source in sources)
                     source.SetValue(result);

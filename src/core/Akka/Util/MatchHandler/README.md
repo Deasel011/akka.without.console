@@ -18,8 +18,8 @@ private class MyActor : ReceiveActor
 {
   public MyActor()
   {
-    Receive<string>(s => Console.WriteLine("Received string: " + s)); //1
-    Receive<int>(i => Console.WriteLine("Received integer: " + i));   //2
+    Receive<string>(s => System.Diagnostics.Debug.WriteLine("Received string: " + s)); //1
+    Receive<int>(i => System.Diagnostics.Debug.WriteLine("Received integer: " + i));   //2
   }
 }
 ```
@@ -30,25 +30,25 @@ Whenever a message of typ `string` is sent to **MyActor** the first handler is i
 If more than one handler matches, the one that appears first is used, and the others are not called.
 
 ```c#
-Receive<string>(s => Console.WriteLine("Received string: " + )s);      //1
-Receive<string>(s => Console.WriteLine("Also received string: " + s)); //2
-Receive<object>(o => Console.WriteLine("Received object: " + o));      //3
+Receive<string>(s => System.Diagnostics.Debug.WriteLine("Received string: " + )s);      //1
+Receive<string>(s => System.Diagnostics.Debug.WriteLine("Also received string: " + s)); //2
+Receive<object>(o => System.Diagnostics.Debug.WriteLine("Received object: " + o));      //3
 ```
 **Example**: The actor receives a message of type `string`. Only the first handler is invoked, even though all three handlers can handle that message.
 
 ### Using predicates
 By specifying a predicate, you can choose which messages to handle.
 ```c#
-Receive<string>(s => s.Length>5, s => Console.WriteLine("Received string: " + s);
+Receive<string>(s => s.Length>5, s => System.Diagnostics.Debug.WriteLine("Received string: " + s);
 ```
 The handler above will only be invoked if the length of the string is greater than 20.
 
 If the predicate do not match, the next matching handler will be used.
 
 ```c#
-Receive<string>(s => s.Length>5, s => Console.WriteLine("1: " + s));    //1
-Receive<string>(s => s.Length>2, s => Console.WriteLine("2: " + s));    //2
-Receive<string>(s => Console.WriteLine("3: " + s));                     //3
+Receive<string>(s => s.Length>5, s => System.Diagnostics.Debug.WriteLine("1: " + s));    //1
+Receive<string>(s => s.Length>2, s => System.Diagnostics.Debug.WriteLine("2: " + s));    //2
+Receive<string>(s => System.Diagnostics.Debug.WriteLine("3: " + s));                     //3
 ```
 **Example**: The actor receives the message "123456". Since the length of is 6, the predicate specified for the first handler will return true, and the first handler will be invoked resulting in "1: 123456" being written to the console.
 
@@ -60,8 +60,8 @@ Receive<string>(s => Console.WriteLine("3: " + s));                     //3
 #### Predicates position
 Predicates can be specified *before* the action handler or *after*. These two declarations are equivalent:
 ```c#
-Receive<string>(s => s.Length>5, s => Console.WriteLine("Received string: " + s));
-Receive<string>(s => Console.WriteLine("Received string: " + s, s => s.Length>5));
+Receive<string>(s => s.Length>5, s => System.Diagnostics.Debug.WriteLine("Received string: " + s));
+Receive<string>(s => System.Diagnostics.Debug.WriteLine("Received string: " + s, s => s.Length>5));
 ```
 
 ### Receive using Funcs
@@ -71,12 +71,12 @@ Receive<string>(s =>
   { 
     if(s.Length>5)
     {
-      Console.WriteLine("1: " + s);
+      System.Diagnostics.Debug.WriteLine("1: " + s);
       return true;
     }
     return false;
   });
-Receive<string>(s => Console.WriteLine("2: " + s);
+Receive<string>(s => System.Diagnostics.Debug.WriteLine("2: " + s);
 ```
 
 **Example**: The actor receives the message "123". Since it's a `string`, the first handler is invoked. The length is only 3 so the if clause will be false and `false` is returned. Since `false` was returned the next matching handler will be invoked, and "2: 123" will be written to the console.
@@ -95,31 +95,31 @@ Another option is to add a handler last that matches all messages, using `Receiv
 ### ReceiveAny
 To catch messages of any type the `ReceiveAny(Action<object> handler)` overload can be specified.
 ```c#
-Receive<string>(s => Console.WriteLine("Received string: " + s);
-ReceiveAny(o => Console.WriteLine("Received object: " + o);
+Receive<string>(s => System.Diagnostics.Debug.WriteLine("Received string: " + s);
+ReceiveAny(o => System.Diagnostics.Debug.WriteLine("Received object: " + o);
 ```
 
 Since it handles everything, it must be specified last. Specifying handlers it after will cause an exception.
 ```c#
-ReceiveAny(o => Console.WriteLine("Received object: " + o);
-Receive<string>(s => Console.WriteLine("Received string: " + s);  //This will cause an exception
+ReceiveAny(o => System.Diagnostics.Debug.WriteLine("Received object: " + o);
+Receive<string>(s => System.Diagnostics.Debug.WriteLine("Received string: " + s);  //This will cause an exception
 ```
 
 **Note** that `Receive<object>(Action<object> handler)` behaves the same as `ReceiveAny()` as it catches all messages. These two are equivalent:
 ```c#
-ReceiveAny(o => Console.WriteLine("Received object: " + o);
-Receive<object>(0 => Console.WriteLine("Received object: " + o); 
+ReceiveAny(o => System.Diagnostics.Debug.WriteLine("Received object: " + o);
+Receive<object>(0 => System.Diagnostics.Debug.WriteLine("Received object: " + o); 
 ```
 
 ###Non generic overloads
 `Receive` has non generic overloads:
 ```c#
-Receive(typeof(string), obj => Console.WriteLine(obj.ToString()) );
+Receive(typeof(string), obj => System.Diagnostics.Debug.WriteLine(obj.ToString()) );
 ```
 Predicates can go before or after the handler:
 ```c#
-Receive(typeof(string), obj=> ((string) obj).Length>5, obj => Console.WriteLine(obj.ToString()) );
-Receive(typeof(string), obj => Console.WriteLine(obj.ToString()), obj=> ((string) obj).Length>5 );
+Receive(typeof(string), obj=> ((string) obj).Length>5, obj => System.Diagnostics.Debug.WriteLine(obj.ToString()) );
+Receive(typeof(string), obj => System.Diagnostics.Debug.WriteLine(obj.ToString()), obj=> ((string) obj).Length>5 );
 ```
 And the non generic Func
 ```c#
@@ -128,7 +128,7 @@ Receive(typeof(string), obj =>
     var s = (string) obj;
     if(s.Length>5)
     {
-      Console.WriteLine("1: " + s);
+      System.Diagnostics.Debug.WriteLine("1: " + s);
       return true;
     }
     return false;

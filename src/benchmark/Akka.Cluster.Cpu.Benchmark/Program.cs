@@ -74,10 +74,10 @@ namespace Akka.Cluster.Cpu.Benchmark
             
             if (showHelp)
             {
-                Console.WriteLine("Usage: dotnet run -c Release");
-                Console.WriteLine("Usage: dotnet run -c Release -- [OPTIONS]");
-                Console.WriteLine("Usage: Akka.Cluster.Cpu.Benchmark [OPTIONS]");
-                Console.WriteLine("Options:");
+                System.Diagnostics.Debug.WriteLine("Usage: dotnet run -c Release");
+                System.Diagnostics.Debug.WriteLine("Usage: dotnet run -c Release -- [OPTIONS]");
+                System.Diagnostics.Debug.WriteLine("Usage: Akka.Cluster.Cpu.Benchmark [OPTIONS]");
+                System.Diagnostics.Debug.WriteLine("Options:");
                 optionSet.WriteOptionDescriptions(Console.Out);
                 return 0;
             }
@@ -121,9 +121,9 @@ namespace Akka.Cluster.Cpu.Benchmark
                 var end = CpuUsage.GetByProcess();
                 var final = end - start;
                 
-                Console.WriteLine($"{i}. [Warmup] {final}");
+                System.Diagnostics.Debug.WriteLine($"{i}. [Warmup] {final}");
             }
-            Console.WriteLine();
+            System.Diagnostics.Debug.WriteLine();
 
             // Start benchmark
             foreach (var i in Enumerable.Range(1, repeat))
@@ -133,7 +133,7 @@ namespace Akka.Cluster.Cpu.Benchmark
                 var end = CpuUsage.GetByProcess();
                 var final = end - start;
                 
-                Console.WriteLine($"{i}. Cpu Usage: {final}");
+                System.Diagnostics.Debug.WriteLine($"{i}. Cpu Usage: {final}");
                 Usages.Add(final.Value);
             }
 
@@ -178,7 +178,7 @@ namespace Akka.Cluster.Cpu.Benchmark
                 .AppendLine(CalculateResult(Usages.Select(u => u.KernelUsage.TotalMicroSeconds), "Kernel"))
                 .AppendLine(CalculateResult(Usages.Select(u => u.TotalMicroSeconds), "Total"));
             
-            Console.WriteLine(sb.ToString());
+            System.Diagnostics.Debug.WriteLine(sb.ToString());
             
             return 0;
         }

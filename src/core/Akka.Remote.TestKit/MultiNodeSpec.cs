@@ -704,7 +704,7 @@ namespace Akka.Remote.TestKit
             {
                 if (disposing)
                 {
-                    Console.WriteLine("---------------DISPOSING--------------------");
+                    System.Diagnostics.Debug.WriteLine("---------------DISPOSING--------------------");
                     MultiNodeSpecAfterAll();
                 }
             }

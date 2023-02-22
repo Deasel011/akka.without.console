@@ -51,7 +51,7 @@ namespace ClusterSharding.Node
 
             Command<ShardRegion.StartEntity>(e =>
             {
-                Console.WriteLine($"'{PersistenceId}' started via remember-entities");
+                System.Diagnostics.Debug.WriteLine($"'{PersistenceId}' started via remember-entities");
 
             });
             
@@ -61,7 +61,7 @@ namespace ClusterSharding.Node
                 {
                     _purchasedItems.Add(purchased.ItemName);
                     var name = Uri.UnescapeDataString(Self.Path.Name);
-                    Console.WriteLine($"'{name}' purchased '{purchased.ItemName}'.\nAll items: [{string.Join(", ", _purchasedItems)}]\n--------------------------");
+                    System.Diagnostics.Debug.WriteLine($"'{name}' purchased '{purchased.ItemName}'.\nAll items: [{string.Join(", ", _purchasedItems)}]\n--------------------------");
                 });
             });
         }

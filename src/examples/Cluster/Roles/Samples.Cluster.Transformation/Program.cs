@@ -28,7 +28,7 @@ namespace Samples.Cluster.Transformation
             LaunchFrontend(new string[0]);
             LaunchFrontend(new string[0]);
             //starting 2 frontend nodes and 3 backend nodes
-            Console.WriteLine("Press any key to exit.");
+            System.Diagnostics.Debug.WriteLine("Press any key to exit.");
             Console.ReadLine();
         }
 
@@ -61,7 +61,7 @@ namespace Samples.Cluster.Transformation
             system.Scheduler.Advanced.ScheduleRepeatedly(interval, interval, 
                 () => frontend.Ask(new TransformationMessages.TransformationJob("hello-" + counter.GetAndIncrement()), timeout)
                     .ContinueWith(
-                        r => Console.WriteLine(r.Result)));
+                        r => System.Diagnostics.Debug.WriteLine(r.Result)));
         }
     }
 }

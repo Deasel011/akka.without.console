@@ -107,7 +107,7 @@ namespace PersistenceExample
                     SaveSnapshot(State);
                     return true;
                 case string msg when msg == "print":
-                    Console.WriteLine(State);
+                    System.Diagnostics.Debug.WriteLine(State);
                     return true;
                 case SaveSnapshotSuccess _:
                 case SaveSnapshotFailure _:

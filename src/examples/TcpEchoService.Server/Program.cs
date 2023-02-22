@@ -26,8 +26,8 @@ namespace TcpEchoService.Server
                  *  $> telnet 127.0.0.1 9001
                  */
 
-                Console.WriteLine("TCP server is listening on *:{0}", port);
-                Console.WriteLine("ENTER to exit...");
+                System.Diagnostics.Debug.WriteLine("TCP server is listening on *:{0}", port);
+                System.Diagnostics.Debug.WriteLine("ENTER to exit...");
                 Console.ReadLine();
                 
                 // Close connection to avoid error message in console

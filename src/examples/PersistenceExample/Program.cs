@@ -34,7 +34,7 @@ namespace PersistenceExample
 
         private static void AtLeastOnceDelivery(ActorSystem system)
         {
-            Console.WriteLine("\n--- AT LEAST ONCE DELIVERY EXAMPLE ---\n");
+            System.Diagnostics.Debug.WriteLine("\n--- AT LEAST ONCE DELIVERY EXAMPLE ---\n");
             var delivery = system.ActorOf(Props.Create(()=> new DeliveryActor()),"delivery");
 
             var deliverer = system.ActorOf(Props.Create(() => new AtLeastOnceDeliveryExampleActor(delivery.Path)));
@@ -47,22 +47,22 @@ namespace PersistenceExample
 
             deliverer.Tell(new Message("bar"));
 
-            Console.WriteLine("\nSYSTEM: Throwing exception in Deliverer\n");
+            System.Diagnostics.Debug.WriteLine("\nSYSTEM: Throwing exception in Deliverer\n");
             deliverer.Tell("boom");
             System.Threading.Thread.Sleep(1000);
 
             deliverer.Tell(new Message("bar1"));
-            Console.WriteLine("\nSYSTEM: Enabling confirmations in 3 seconds\n");
+            System.Diagnostics.Debug.WriteLine("\nSYSTEM: Enabling confirmations in 3 seconds\n");
 
             System.Threading.Thread.Sleep(3000);
-            Console.WriteLine("\nSYSTEM: Enabled confirmations\n");
+            System.Diagnostics.Debug.WriteLine("\nSYSTEM: Enabled confirmations\n");
             delivery.Tell("start");
             
         }
 
         private static void SnapshotedActor(ActorSystem system)
         {
-            Console.WriteLine("\n--- SNAPSHOTED ACTOR EXAMPLE ---\n");
+            System.Diagnostics.Debug.WriteLine("\n--- SNAPSHOTED ACTOR EXAMPLE ---\n");
             var pref = system.ActorOf(Props.Create<SnapshotedExampleActor>(), "snapshoted-actor");
 
             // send two messages (a, b) and persist them
@@ -98,7 +98,7 @@ namespace PersistenceExample
 
         private static void FailingActorExample(ActorSystem system)
         {
-            Console.WriteLine("\n--- FAILING ACTOR EXAMPLE ---\n");
+            System.Diagnostics.Debug.WriteLine("\n--- FAILING ACTOR EXAMPLE ---\n");
             var pref = system.ActorOf(Props.Create<ExamplePersistentFailingActor>(), "failing-actor");
 
             pref.Tell("a");
@@ -120,7 +120,7 @@ namespace PersistenceExample
 
         private static void BasicUsage(ActorSystem system)
         {
-            Console.WriteLine("\n--- BASIC EXAMPLE ---\n");
+            System.Diagnostics.Debug.WriteLine("\n--- BASIC EXAMPLE ---\n");
 
             // create a persistent actor, using LocalSnapshotStore and MemoryJournal
             var aref = system.ActorOf(Props.Create<ExamplePersistentActor>(), "basic-actor");

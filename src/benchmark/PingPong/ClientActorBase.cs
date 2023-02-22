@@ -38,7 +38,7 @@ namespace PingPong
                 }
                 else if(_received >= _repeat)
                 {
-                    //       Console.WriteLine("done {0}", Self.Path);
+                    //       System.Diagnostics.Debug.WriteLine("done {0}", Self.Path);
                     _latch.SetResult(true);
                 }
                 return true;

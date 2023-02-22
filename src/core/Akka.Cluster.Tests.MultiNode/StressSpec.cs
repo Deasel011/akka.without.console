@@ -962,11 +962,11 @@ akka.remote.default-remote-dispatcher {
                
                 var removeRole = Roles[NbrUsedRoles - 1];
                 var removeAddress = GetAddress(removeRole);
-                Console.WriteLine($"Preparing to {FormatNodeLeave()}[{removeAddress}] role [{removeRole.Name}] out of [{Roles.Count}]");
+                System.Diagnostics.Debug.WriteLine($"Preparing to {FormatNodeLeave()}[{removeAddress}] role [{removeRole.Name}] out of [{Roles.Count}]");
                 RunOn(() =>
                 {
                     var watchee = Sys.ActorOf(Props.Create(() => new Watchee()), "watchee");
-                    Console.WriteLine("Created watchee [{0}]", watchee);
+                    System.Diagnostics.Debug.WriteLine("Created watchee [{0}]", watchee);
                 }, removeRole);
 
                 EnterBarrier("watchee-created-" + Step);
@@ -1083,8 +1083,8 @@ akka.remote.default-remote-dispatcher {
                     var currentRoles = Roles.Take(NbrUsedRoles - numberOfNodes).ToArray();
                     var removeRoles = Roles.Skip(currentRoles.Length).Take(numberOfNodes).ToArray();
                     var title = $"partition {numberOfNodes} in {NbrUsedRoles} nodes cluster";
-                    Console.WriteLine(title);
-                    Console.WriteLine("[{0}] are blackholing [{1}]", string.Join(",", currentRoles.Select(x => x.ToString())), string.Join(",", removeRoles.Select(x => x.ToString())));
+                    System.Diagnostics.Debug.WriteLine(title);
+                    System.Diagnostics.Debug.WriteLine("[{0}] are blackholing [{1}]", string.Join(",", currentRoles.Select(x => x.ToString())), string.Join(",", removeRoles.Select(x => x.ToString())));
                     CreateResultAggregator(title, expectedResults: currentRoles.Length, includeInHistory: true);
 
                     RunOn(() =>

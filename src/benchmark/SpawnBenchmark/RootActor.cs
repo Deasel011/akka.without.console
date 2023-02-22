@@ -35,7 +35,7 @@ namespace SpawnBenchmark
 
         private void StartRun(int n)
         {
-            Console.WriteLine($"Start run {n}");
+            System.Diagnostics.Debug.WriteLine($"Start run {n}");
 
             var start = Stopwatch.ElapsedMilliseconds;
             Context.ActorOf(SpawnActor.Props).Tell(new SpawnActor.Start(7, 0));
@@ -49,7 +49,7 @@ namespace SpawnBenchmark
                 if (message is long x)
                 {
                     var diff = (Stopwatch.ElapsedMilliseconds - start);
-                    Console.WriteLine($"Run {n + 1} result: {x} in {diff} ms");
+                    System.Diagnostics.Debug.WriteLine($"Run {n + 1} result: {x} in {diff} ms");
                     if (n == 0)
                     {
                         Context.System.Terminate();

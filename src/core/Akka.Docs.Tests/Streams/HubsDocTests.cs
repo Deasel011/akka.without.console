@@ -75,8 +75,8 @@ namespace DocsExamples.Streams
             Source<string, NotUsed> fromProducer = runnableGraph.Run(Materializer);
 
             // Print out messages from the producer in two independent consumers
-            fromProducer.RunForeach(msg => Console.WriteLine($"consumer1:{msg}"), Materializer);
-            fromProducer.RunForeach(msg => Console.WriteLine($"consumer2:{msg}"), Materializer);
+            fromProducer.RunForeach(msg => System.Diagnostics.Debug.WriteLine($"consumer1:{msg}"), Materializer);
+            fromProducer.RunForeach(msg => System.Diagnostics.Debug.WriteLine($"consumer2:{msg}"), Materializer);
             #endregion
         }
 
@@ -146,8 +146,8 @@ namespace DocsExamples.Streams
             Source<string, NotUsed> fromProducer = runnableGraph.Run(Materializer);
 
             // Print out messages from the producer in two independent consumers
-            fromProducer.RunForeach(msg => Console.WriteLine("Consumer1: " + msg), Materializer);
-            fromProducer.RunForeach(msg => Console.WriteLine("Consumer2: " + msg), Materializer);
+            fromProducer.RunForeach(msg => System.Diagnostics.Debug.WriteLine("Consumer1: " + msg), Materializer);
+            fromProducer.RunForeach(msg => System.Diagnostics.Debug.WriteLine("Consumer2: " + msg), Materializer);
 
             #endregion
         }
@@ -187,8 +187,8 @@ namespace DocsExamples.Streams
             Source<string, NotUsed> fromProducer = runnableGraph.Run(Materializer);
 
             // Print out messages from the producer in two independent consumers
-            fromProducer.RunForeach(msg => Console.WriteLine("Consumer1: " + msg), Materializer);
-            fromProducer.RunForeach(msg => Console.WriteLine("Consumer2: " + msg), Materializer);
+            fromProducer.RunForeach(msg => System.Diagnostics.Debug.WriteLine("Consumer1: " + msg), Materializer);
+            fromProducer.RunForeach(msg => System.Diagnostics.Debug.WriteLine("Consumer2: " + msg), Materializer);
 
             #endregion
         }
@@ -215,9 +215,9 @@ namespace DocsExamples.Streams
             Source<int, NotUsed> fromProducer = runnableGraph.Run(Materializer);
 
             // Print out messages from the producer in two independent consumers
-            fromProducer.RunForeach(msg => Console.WriteLine("Consumer1: " + msg), Materializer);
+            fromProducer.RunForeach(msg => System.Diagnostics.Debug.WriteLine("Consumer1: " + msg), Materializer);
             fromProducer.Throttle(10, TimeSpan.FromMilliseconds(100), 10, ThrottleMode.Shaping)
-                .RunForeach(msg => Console.WriteLine("Consumer2: " + msg), Materializer);
+                .RunForeach(msg => System.Diagnostics.Debug.WriteLine("Consumer2: " + msg), Materializer);
 
             #endregion
         }

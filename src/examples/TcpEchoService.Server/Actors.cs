@@ -29,7 +29,7 @@ namespace TcpEchoService.Server
             // To behave as TCP listener, actor should be able to handle Tcp.Connected messages
             Receive<Tcp.Connected>(connected =>
             {
-                Console.WriteLine("Remote address {0} connected", connected.RemoteAddress);
+                System.Diagnostics.Debug.WriteLine("Remote address {0} connected", connected.RemoteAddress);
                 var handler = Context.ActorOf(Props.Create(() => new EchoConnectionHandler(connected.RemoteAddress, Sender)));
                 Sender.Tell(new Tcp.Register(handler));
             });
@@ -60,7 +60,7 @@ namespace TcpEchoService.Server
             Receive<Tcp.Received>(received =>
             {
                 var text = Encoding.UTF8.GetString(received.Data.ToArray()).Trim();
-                Console.WriteLine("Received '{0}' from remote address [{1}]", text, remote);
+                System.Diagnostics.Debug.WriteLine("Received '{0}' from remote address [{1}]", text, remote);
                 if (text == "exit")
                     Context.Stop(Self);
                 else
@@ -68,12 +68,12 @@ namespace TcpEchoService.Server
             });
             Receive<Tcp.ConnectionClosed>(closed =>
             {
-                Console.WriteLine("Stopped, remote connection [{0}] closed", remote);
+                System.Diagnostics.Debug.WriteLine("Stopped, remote connection [{0}] closed", remote);
                 Context.Stop(Self);
             });
             Receive<Terminated>(terminated =>
             {
-                Console.WriteLine("Stopped, remote connection [{0}] died", remote);
+                System.Diagnostics.Debug.WriteLine("Stopped, remote connection [{0}] died", remote);
                 Context.Stop(Self);
             });
         }

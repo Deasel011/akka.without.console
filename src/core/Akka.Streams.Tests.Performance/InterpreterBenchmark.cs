@@ -95,7 +95,7 @@ namespace Akka.Streams.Tests.Performance
                     else
                         CompleteStage();
                 }, onDownstreamFinish: InternalOnDownstreamFinish);
-                Console.WriteLine("Handler Set");
+                System.Diagnostics.Debug.WriteLine("Handler Set");
             }
 
             public override Outlet Out { get; }

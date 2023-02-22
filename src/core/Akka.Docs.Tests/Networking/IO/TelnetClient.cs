@@ -28,7 +28,7 @@ namespace DocsExamples.Networking.IO
             if (message is Tcp.Connected)
             {
                 var connected = message as Tcp.Connected;
-                Console.WriteLine("Connected to {0}", connected.RemoteAddress);
+                System.Diagnostics.Debug.WriteLine("Connected to {0}", connected.RemoteAddress);
 
                 // Register self as connection handler
                 Sender.Tell(new Tcp.Register(Self));
@@ -37,7 +37,7 @@ namespace DocsExamples.Networking.IO
             }
             else if (message is Tcp.CommandFailed)
             {
-                Console.WriteLine("Connection failed");
+                System.Diagnostics.Debug.WriteLine("Connection failed");
             }
             else Unhandled(message);
         }
@@ -49,7 +49,7 @@ namespace DocsExamples.Networking.IO
                 if (message is Tcp.Received)  // data received from network
                 {
                     var received = message as Tcp.Received;
-                    Console.WriteLine(Encoding.ASCII.GetString(received.Data.ToArray()));
+                    System.Diagnostics.Debug.WriteLine(Encoding.ASCII.GetString(received.Data.ToArray()));
                 }
                 else if (message is string)   // data received from console
                 {
@@ -58,7 +58,7 @@ namespace DocsExamples.Networking.IO
                 }
                 else if (message is Tcp.PeerClosed)
                 {
-                    Console.WriteLine("Connection closed");
+                    System.Diagnostics.Debug.WriteLine("Connection closed");
                 }
                 else Unhandled(message);
             };

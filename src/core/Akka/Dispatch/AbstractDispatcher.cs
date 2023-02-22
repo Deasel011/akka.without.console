@@ -386,7 +386,7 @@ channel-executor.priority = normal");
                 foreach (var dispatcher in Actors.Value.Keys)
                 {
                     var a = Actors.Value[dispatcher];
-                    Console.WriteLine("{0} inhabitants {1}", dispatcher, dispatcher.Inhabitants);
+                    System.Diagnostics.Debug.WriteLine("{0} inhabitants {1}", dispatcher, dispatcher.Inhabitants);
                     foreach (var actor in a)
                     {
                         var status = actor.IsTerminated ? "(terminated)" : "(active)";
@@ -394,7 +394,7 @@ channel-executor.priority = normal");
                             ? " " + actor.AsInstanceOf<ActorRefWithCell>().Underlying.NumberOfMessages + " messages"
                             : " " + actor.GetType();
                         var parent = ", parent:" + actor.Parent;
-                        Console.WriteLine(" -> " + actor + status + messages + parent);
+                        System.Diagnostics.Debug.WriteLine(" -> " + actor + status + messages + parent);
                     }
                 }
             }

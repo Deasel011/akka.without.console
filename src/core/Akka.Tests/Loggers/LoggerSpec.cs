@@ -169,7 +169,7 @@ akka.stdout-loglevel = DEBUG");
         {
             protected override void Log(object message)
             {
-                Console.WriteLine(message);
+                System.Diagnostics.Debug.WriteLine(message);
             }
         }
         

@@ -25,7 +25,7 @@ namespace DocsExamples.Networking.IO
             if (message is Tcp.Bound)
             {
                 var bound = message as Tcp.Bound;
-                Console.WriteLine("Listening on {0}", bound.LocalAddress);
+                System.Diagnostics.Debug.WriteLine("Listening on {0}", bound.LocalAddress);
             }
             else if (message is Tcp.Connected)
             {

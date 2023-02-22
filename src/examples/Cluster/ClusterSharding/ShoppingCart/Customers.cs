@@ -34,7 +34,7 @@ namespace ShoppingCart
             {
                 _purchasedItems.Add(purchase.ItemName);
                 var name = Uri.UnescapeDataString(Self.Path.Name);
-                Console.WriteLine(
+                System.Diagnostics.Debug.WriteLine(
 @$"'{name}' purchased '{purchase.ItemName}'.
 All items: [{string.Join(", ", _purchasedItems)}]
 --------------------------");

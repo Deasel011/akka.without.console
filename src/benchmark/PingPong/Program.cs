@@ -63,56 +63,56 @@ namespace PingPong
             if (processorCount == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Failed to read processor count..");
+                System.Diagnostics.Debug.WriteLine("Failed to read processor count..");
                 return;
             }
 
-            Console.WriteLine("Warming up...");
+            System.Diagnostics.Debug.WriteLine("Warming up...");
             //Warm up
             await ActorSystem.Create("WarmupSystem").Terminate();
 
             // print statistics AFTER warm up to observe ActorSystem impact on ThreadCount
 
             
-            Console.WriteLine("OSVersion:              {0}", Environment.OSVersion);
-            Console.WriteLine("ProcessorCount:         {0}", processorCount);
-            Console.WriteLine("ClockSpeed:             {0} MHZ", CpuSpeed());
-            Console.WriteLine("Actor Count:            {0}", processorCount * 2);
-            Console.WriteLine("Messages sent/received: {0}  ({0:0e0})", GetTotalMessagesReceived(repeat));
-            Console.WriteLine("Is Server GC:           {0}", GCSettings.IsServerGC);
-            Console.WriteLine("Thread count:           {0}", Process.GetCurrentProcess().Threads.Count);
-            Console.WriteLine();
+            System.Diagnostics.Debug.WriteLine("OSVersion:              {0}", Environment.OSVersion);
+            System.Diagnostics.Debug.WriteLine("ProcessorCount:         {0}", processorCount);
+            System.Diagnostics.Debug.WriteLine("ClockSpeed:             {0} MHZ", CpuSpeed());
+            System.Diagnostics.Debug.WriteLine("Actor Count:            {0}", processorCount * 2);
+            System.Diagnostics.Debug.WriteLine("Messages sent/received: {0}  ({0:0e0})", GetTotalMessagesReceived(repeat));
+            System.Diagnostics.Debug.WriteLine("Is Server GC:           {0}", GCSettings.IsServerGC);
+            System.Diagnostics.Debug.WriteLine("Thread count:           {0}", Process.GetCurrentProcess().Threads.Count);
+            System.Diagnostics.Debug.WriteLine();
 
 
             Console.Write("ActorBase    first start time: ");
             await Benchmark<ClientActorBase>(1, 1, 1, PrintStats.StartTimeOnly, -1, -1);
-            Console.WriteLine(" ms");
+            System.Diagnostics.Debug.WriteLine(" ms");
             Console.Write("ReceiveActor first start time: ");
             await Benchmark<ClientReceiveActor>(1, 1, 1, PrintStats.StartTimeOnly, -1, -1);
-            Console.WriteLine(" ms");
+            System.Diagnostics.Debug.WriteLine(" ms");
 
             if (testAsync)
             {
                 Console.Write("AsyncActor   first start time: ");
                 await Benchmark<ClientAsyncActor>(1, 1, 1, PrintStats.StartTimeOnly, -1, -1);
-                Console.WriteLine(" ms");
+                System.Diagnostics.Debug.WriteLine(" ms");
             }
 
-            Console.WriteLine();
+            System.Diagnostics.Debug.WriteLine();
 
             Console.Write("            ActorBase                          ReceiveActor");
             if (testAsync)
             {
                 Console.Write("                       AsyncActor");
             }
-            Console.WriteLine();
+            System.Diagnostics.Debug.WriteLine();
 
             Console.Write("Throughput, Msgs/sec, Start [ms], Total [ms],  Msgs/sec, Start [ms], Total [ms]");
             if (testAsync)
             {
                 Console.Write(",  Msgs/sec, Start [ms], Total [ms]");
             }
-            Console.WriteLine();
+            System.Diagnostics.Debug.WriteLine();
 
             for (var i = 0; i < timesToRun; i++)
             {
@@ -140,12 +140,12 @@ namespace PingPong
                         redCountAsyncActor = result3.Item3;
                     }
 
-                    Console.WriteLine();
+                    System.Diagnostics.Debug.WriteLine();
                 }
             }
 
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Done..");
+            System.Diagnostics.Debug.WriteLine("Done..");
         }
 
         public static IEnumerable<int> GetThroughputSettings()
@@ -196,7 +196,7 @@ namespace PingPong
             }
             if (!countdown.Wait(TimeSpan.FromSeconds(10)))
             {
-                Console.WriteLine("The system did not start in 10 seconds. Aborting.");
+                System.Diagnostics.Debug.WriteLine("The system did not start in 10 seconds. Aborting.");
                 return (false, bestThroughput, redCount);
             }
             var setupTime = totalWatch.Elapsed;

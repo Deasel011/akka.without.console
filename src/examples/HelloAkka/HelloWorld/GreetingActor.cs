@@ -19,11 +19,11 @@ namespace HelloWorld
         public GreetingActor()
         {
             // Tell the actor to respond to the Greet message
-            Receive<Greet>(greet => Console.WriteLine($"Hello {greet.Who}", ConsoleColor.Green));
+            Receive<Greet>(greet => System.Diagnostics.Debug.WriteLine($"Hello {greet.Who}", ConsoleColor.Green));
         }
-        protected override void PreStart() => Console.WriteLine("Good Morning, we are awake!", ConsoleColor.Green);
+        protected override void PreStart() => System.Diagnostics.Debug.WriteLine("Good Morning, we are awake!", ConsoleColor.Green);
 
-        protected override void PostStop() => Console.WriteLine("Good Night, going to bed!", ConsoleColor.Red);
+        protected override void PostStop() => System.Diagnostics.Debug.WriteLine("Good Night, going to bed!", ConsoleColor.Red);
     }
 }
 #endregion

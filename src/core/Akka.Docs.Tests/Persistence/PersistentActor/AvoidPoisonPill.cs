@@ -29,10 +29,10 @@ namespace DocsExamples.Persistence.PersistentActor
             {
                 if (message is string c)
                 {
-                    Console.WriteLine(c);
+                    System.Diagnostics.Debug.WriteLine(c);
                     Persist($"handle-{c}", param =>
                     {
-                        Console.WriteLine(param);
+                        System.Diagnostics.Debug.WriteLine(param);
                     });
                 }
                 else if (message is Shutdown)

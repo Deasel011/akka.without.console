@@ -106,7 +106,7 @@ namespace DocsExamples.Streams
             }
 
             private Sink<string, Task<Done>> LogsSinksFor(string id) =>
-                Sink.ForEach<string>(Console.WriteLine);
+                Sink.ForEach<string>(System.Diagnostics.Debug.WriteLine);
         }
         #endregion
 
@@ -125,7 +125,7 @@ namespace DocsExamples.Streams
             var sourceActor = Sys.ActorOf(Props.Create<DataSource>(), "dataSource");
 
             var offer = await sourceActor.Ask<LogsOffer>(new RequestLogs(1337));
-            await offer.SourceRef.Source.RunForeach(Console.WriteLine, Materializer);
+            await offer.SourceRef.Source.RunForeach(System.Diagnostics.Debug.WriteLine, Materializer);
             #endregion
         }
 

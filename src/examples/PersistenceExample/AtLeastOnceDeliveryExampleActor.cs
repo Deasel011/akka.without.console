@@ -74,12 +74,12 @@ namespace PersistenceExample
                 case Confirmable msg:
                     if (_confirming)
                     {
-                        Console.WriteLine("Confirming delivery of message id: {0} and data: {1}", msg.DeliveryId, msg.Data);
+                        System.Diagnostics.Debug.WriteLine("Confirming delivery of message id: {0} and data: {1}", msg.DeliveryId, msg.Data);
                         Context.Sender.Tell(new Confirmation(msg.DeliveryId));
                     }
                     else
                     {
-                        Console.WriteLine("Ignoring message id: {0} and data: {1}", msg.DeliveryId, msg.Data);
+                        System.Diagnostics.Debug.WriteLine("Ignoring message id: {0} and data: {1}", msg.DeliveryId, msg.Data);
                     }
                     break;
             }
@@ -111,18 +111,18 @@ namespace PersistenceExample
             {
                 case Message msg:
                     var messageData =  msg.Data;
-                    Console.WriteLine("recovered {0}",messageData);
+                    System.Diagnostics.Debug.WriteLine("recovered {0}",messageData);
                     Deliver(DeliveryPath,
                         id =>
                         {
-                            Console.WriteLine("recovered delivery task: {0}, with deliveryId: {1}", messageData, id);
+                            System.Diagnostics.Debug.WriteLine("recovered delivery task: {0}, with deliveryId: {1}", messageData, id);
                             return new Confirmable(id, messageData);
                         });
                     return true;
                 
                 case Confirmation confirm:
                     var deliveryId = confirm.DeliveryId;
-                    Console.WriteLine("recovered confirmation of {0}", deliveryId);
+                    System.Diagnostics.Debug.WriteLine("recovered confirmation of {0}", deliveryId);
                     ConfirmDelivery(deliveryId);
                     return true;
                 
@@ -142,7 +142,7 @@ namespace PersistenceExample
                     Persist(msg, m =>
                         Deliver(DeliveryPath,
                             id => {
-                                Console.WriteLine("sending: {0}, with deliveryId: {1}", m.Data, id);
+                                System.Diagnostics.Debug.WriteLine("sending: {0}, with deliveryId: {1}", m.Data, id);
                                 return new Confirmable(id, m.Data);
                             })
                     );

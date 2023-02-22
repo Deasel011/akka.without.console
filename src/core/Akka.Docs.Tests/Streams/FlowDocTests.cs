@@ -33,7 +33,7 @@ namespace DocsExamples.Streams
             actorRef.Tell("hit");
 
             // pass source around for materialization
-            source.RunWith(Sink.ForEach<string>(Console.WriteLine), Sys.Materializer());
+            source.RunWith(Sink.ForEach<string>(System.Diagnostics.Debug.WriteLine), Sys.Materializer());
 
             #endregion
         }

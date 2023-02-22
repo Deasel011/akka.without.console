@@ -289,7 +289,7 @@ namespace Akka.Streams.Tests
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine(
+                    System.Diagnostics.Debug.WriteLine(
                         $"Steps leading to failure:\n{string.Join("\n", _debugLog)}\nCurrentScript: {_currentScript.Debug()}");
                     throw;
                 }

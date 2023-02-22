@@ -406,7 +406,7 @@ namespace Akka.Streams.Tests.Implementation.Fusing
                 public void OnNext(T element, int eventLimit = int.MaxValue)
                 {
                     if (GraphInterpreter.IsDebug)
-                        Console.WriteLine($"----- NEXT: {this} {element}");
+                        System.Diagnostics.Debug.WriteLine($"----- NEXT: {this} {element}");
                     Push(Outlet, element);
                     Interpreter.Execute(eventLimit);
                 }
@@ -414,7 +414,7 @@ namespace Akka.Streams.Tests.Implementation.Fusing
                 public void OnComplete(int eventLimit = int.MaxValue)
                 {
                     if (GraphInterpreter.IsDebug)
-                        Console.WriteLine($"----- COMPLETE: {this}");
+                        System.Diagnostics.Debug.WriteLine($"----- COMPLETE: {this}");
                     Complete(Outlet);
                     Interpreter.Execute(eventLimit);
                 }
@@ -422,7 +422,7 @@ namespace Akka.Streams.Tests.Implementation.Fusing
                 public void OnFailure(int eventLimit = int.MaxValue, Exception ex = null)
                 {
                     if (GraphInterpreter.IsDebug)
-                        Console.WriteLine($"----- FAIL: {this}");
+                        System.Diagnostics.Debug.WriteLine($"----- FAIL: {this}");
                     Fail(Outlet, ex);
                     Interpreter.Execute(eventLimit);
                 }
@@ -454,7 +454,7 @@ namespace Akka.Streams.Tests.Implementation.Fusing
                 public void RequestOne(int eventLimit = int.MaxValue)
                 {
                     if (GraphInterpreter.IsDebug)
-                        Console.WriteLine($"----- REQ: {this}");
+                        System.Diagnostics.Debug.WriteLine($"----- REQ: {this}");
                     Pull(Inlet);
                     Interpreter.Execute(eventLimit);
                 }
@@ -462,7 +462,7 @@ namespace Akka.Streams.Tests.Implementation.Fusing
                 public void Cancel(int eventLimit = int.MaxValue)
                 {
                     if (GraphInterpreter.IsDebug)
-                        Console.WriteLine($"----- CANCEL: {this}");
+                        System.Diagnostics.Debug.WriteLine($"----- CANCEL: {this}");
                     Cancel(Inlet);
                     Interpreter.Execute(eventLimit);
                 }

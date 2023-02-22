@@ -21,7 +21,7 @@ namespace Tutorials.Tutorial1
             {
                 case "printit":
                     IActorRef secondRef = Context.ActorOf(Props.Empty, "second-actor");
-                    Console.WriteLine($"Second: {secondRef}");
+                    System.Diagnostics.Debug.WriteLine($"Second: {secondRef}");
                     break;
             }
         }
@@ -33,11 +33,11 @@ namespace Tutorials.Tutorial1
     {
         protected override void PreStart()
         {
-            Console.WriteLine("first started");
+            System.Diagnostics.Debug.WriteLine("first started");
             Context.ActorOf(Props.Create<StartStopActor2>(), "second");
         }
 
-        protected override void PostStop() => Console.WriteLine("first stopped");
+        protected override void PostStop() => System.Diagnostics.Debug.WriteLine("first stopped");
 
         protected override void OnReceive(object message)
         {
@@ -52,8 +52,8 @@ namespace Tutorials.Tutorial1
 
     public class StartStopActor2 : UntypedActor
     {
-        protected override void PreStart() => Console.WriteLine("second started");
-        protected override void PostStop() => Console.WriteLine("second stopped");
+        protected override void PreStart() => System.Diagnostics.Debug.WriteLine("second started");
+        protected override void PostStop() => System.Diagnostics.Debug.WriteLine("second stopped");
 
         protected override void OnReceive(object message)
         {
@@ -79,15 +79,15 @@ namespace Tutorials.Tutorial1
 
     public class SupervisedActor : UntypedActor
     {
-        protected override void PreStart() => Console.WriteLine("supervised actor started");
-        protected override void PostStop() => Console.WriteLine("supervised actor stopped");
+        protected override void PreStart() => System.Diagnostics.Debug.WriteLine("supervised actor started");
+        protected override void PostStop() => System.Diagnostics.Debug.WriteLine("supervised actor stopped");
 
         protected override void OnReceive(object message)
         {
             switch (message)
             {
                 case "fail":
-                    Console.WriteLine("supervised actor fails now");
+                    System.Diagnostics.Debug.WriteLine("supervised actor fails now");
                     throw new Exception("I failed!");
             }
         }
@@ -101,7 +101,7 @@ namespace Tutorials.Tutorial1
         {
             #region print-refs2
             var firstRef = Sys.ActorOf(Props.Create<PrintMyActorRefActor>(), "first-actor");
-            Console.WriteLine($"First: {firstRef}");
+            System.Diagnostics.Debug.WriteLine($"First: {firstRef}");
             firstRef.Tell("printit", ActorRefs.NoSender);
             #endregion
         }

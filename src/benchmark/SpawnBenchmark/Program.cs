@@ -16,7 +16,7 @@ namespace SpawnBenchmark
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"Is Server GC {GCSettings.IsServerGC}");
+            System.Diagnostics.Debug.WriteLine($"Is Server GC {GCSettings.IsServerGC}");
 
             var config = ConfigurationFactory.ParseString("akka.suppress-json-serializer-warning=on");
             using (var sys = ActorSystem.Create("main", config))

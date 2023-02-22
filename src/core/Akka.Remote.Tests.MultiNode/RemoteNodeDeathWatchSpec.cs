@@ -160,7 +160,7 @@ namespace Akka.Remote.Tests.MultiNode
         [MultiNodeFact]
         public void RemoteNodeDeathWatchSpecs()
         {
-            Console.WriteLine($"Executing with {Scenario} scenario");
+            System.Diagnostics.Debug.WriteLine($"Executing with {Scenario} scenario");
 
             RemoteNodeDeathWatch_must_receive_Terminated_when_remote_actor_is_stopped();
             RemoteNodeDeathWatch_must_cleanup_after_watch_unwatch();

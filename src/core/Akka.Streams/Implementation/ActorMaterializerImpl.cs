@@ -124,7 +124,7 @@ namespace Akka.Streams.Implementation
                 IDictionary<IModule, object> materializedValues)
             {
                 if(IsDebug)
-                    Console.WriteLine($"materializing {atomic}");
+                    System.Diagnostics.Debug.WriteLine($"materializing {atomic}");
 
                 if (atomic is ISinkModule)
                 {

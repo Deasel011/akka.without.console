@@ -86,7 +86,7 @@ namespace Akka.Streams.Implementation.Fusing
                 info);
 
             if (StreamLayout.IsDebug) StreamLayout.Validate(module);
-            if (IsDebug) Console.WriteLine(module.ToString());
+            if (IsDebug) System.Diagnostics.Debug.WriteLine(module.ToString());
 
             return new Streams.Fusing.FusedGraph<TShape, TMat>(module, (TShape) shape);
         }
@@ -567,7 +567,7 @@ namespace Akka.Streams.Implementation.Fusing
         /// </summary>
         /// <param name="indent">TBD</param>
         /// <param name="msg">TBD</param>
-        internal static void Log(int indent, string msg) => Console.WriteLine("{0}{1}", string.Empty.PadLeft(indent*2), msg);
+        internal static void Log(int indent, string msg) => System.Diagnostics.Debug.WriteLine("{0}{1}", string.Empty.PadLeft(indent*2), msg);
     }
 
     /// <summary>
@@ -947,11 +947,11 @@ namespace Akka.Streams.Implementation.Fusing
         /// </summary>
         internal void Dump()
         {
-            Console.WriteLine("StructuralInfo:");
-            Console.WriteLine("  newIns:");
-            NewInputs.ForEach(kvp => Console.WriteLine($"    {kvp.Key} ({Hash(kvp.Key)}) -> {string.Join(",", kvp.Value.Select(Hash))}"));
-            Console.WriteLine("  newOuts:");
-            NewInputs.ForEach(kvp => Console.WriteLine($"    {kvp.Key} ({Hash(kvp.Key)}) -> {string.Join(",", kvp.Value.Select(Hash))}"));
+            System.Diagnostics.Debug.WriteLine("StructuralInfo:");
+            System.Diagnostics.Debug.WriteLine("  newIns:");
+            NewInputs.ForEach(kvp => System.Diagnostics.Debug.WriteLine($"    {kvp.Key} ({Hash(kvp.Key)}) -> {string.Join(",", kvp.Value.Select(Hash))}"));
+            System.Diagnostics.Debug.WriteLine("  newOuts:");
+            NewInputs.ForEach(kvp => System.Diagnostics.Debug.WriteLine($"    {kvp.Key} ({Hash(kvp.Key)}) -> {string.Join(",", kvp.Value.Select(Hash))}"));
         }
 
         /// <summary>

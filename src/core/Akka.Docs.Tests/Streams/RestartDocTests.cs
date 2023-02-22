@@ -56,7 +56,7 @@ namespace DocsExamples.Streams
             #region with-kill-switch
             var killSwitch = restartSource
                 .ViaMaterialized(KillSwitches.Single<string>(), Keep.Right)
-                .ToMaterialized(Sink.ForEach<string>(evt => Console.WriteLine($"Got event: {evt}")), Keep.Left)
+                .ToMaterialized(Sink.ForEach<string>(evt => System.Diagnostics.Debug.WriteLine($"Got event: {evt}")), Keep.Left)
                 .Run(Materializer);
 
             DoSomethingElse();

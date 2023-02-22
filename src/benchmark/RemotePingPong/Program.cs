@@ -87,21 +87,21 @@ namespace RemotePingPong
             if (processorCount == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Failed to read processor count..");
+                System.Diagnostics.Debug.WriteLine("Failed to read processor count..");
                 return;
             }
 
-            Console.WriteLine("OSVersion:                         {0}", Environment.OSVersion);
-            Console.WriteLine("ProcessorCount:                    {0}", processorCount);
-            Console.WriteLine("ClockSpeed:                        {0} MHZ", CpuSpeed());
-            Console.WriteLine("Actor Count:                       {0}", processorCount * 2);
-            Console.WriteLine("Messages sent/received per client: {0}  ({0:0e0})", repeat*2);
-            Console.WriteLine("Is Server GC:                      {0}", GCSettings.IsServerGC);
-            Console.WriteLine("Thread count:                      {0}", Process.GetCurrentProcess().Threads.Count);
-            Console.WriteLine();
+            System.Diagnostics.Debug.WriteLine("OSVersion:                         {0}", Environment.OSVersion);
+            System.Diagnostics.Debug.WriteLine("ProcessorCount:                    {0}", processorCount);
+            System.Diagnostics.Debug.WriteLine("ClockSpeed:                        {0} MHZ", CpuSpeed());
+            System.Diagnostics.Debug.WriteLine("Actor Count:                       {0}", processorCount * 2);
+            System.Diagnostics.Debug.WriteLine("Messages sent/received per client: {0}  ({0:0e0})", repeat*2);
+            System.Diagnostics.Debug.WriteLine("Is Server GC:                      {0}", GCSettings.IsServerGC);
+            System.Diagnostics.Debug.WriteLine("Thread count:                      {0}", Process.GetCurrentProcess().Threads.Count);
+            System.Diagnostics.Debug.WriteLine();
 
             //Print tables
-            Console.WriteLine("Num clients, Total [msg], Msgs/sec, Total [ms], Start Threads, End Threads");
+            System.Diagnostics.Debug.WriteLine("Num clients, Total [msg], Msgs/sec, Total [ms], Start Threads, End Threads");
 
             _firstRun = false;
         }
@@ -123,7 +123,7 @@ namespace RemotePingPong
             }
 
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Done..");
+            System.Diagnostics.Debug.WriteLine("Done..");
         }
 
         public static IEnumerable<int> GetClientSettings()
@@ -221,7 +221,7 @@ namespace RemotePingPong
             }
 
             Console.ForegroundColor = foregroundColor;
-            Console.WriteLine("{0,10},{1,8},{2,10},{3,11}, {4,13}, {5,15}", numberOfClients, totalMessagesReceived, throughput, sw.Elapsed.TotalMilliseconds.ToString("F2", CultureInfo.InvariantCulture), startThreads, endThreads);
+            System.Diagnostics.Debug.WriteLine("{0,10},{1,8},{2,10},{3,11}, {4,13}, {5,15}", numberOfClients, totalMessagesReceived, throughput, sw.Elapsed.TotalMilliseconds.ToString("F2", CultureInfo.InvariantCulture), startThreads, endThreads);
             return (redCount <= 3, bestThroughput, redCount);
         }
 

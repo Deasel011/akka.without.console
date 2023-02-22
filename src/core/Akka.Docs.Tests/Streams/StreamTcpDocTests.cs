@@ -43,7 +43,7 @@ namespace DocsExamples.Streams
             Tcp.ServerBinding binding = await Sys.TcpStream()
                 .BindAndHandle(echo, Materializer, "localhost", 9000);
 
-            Console.WriteLine($"Server listening at {binding.LocalAddress}");
+            System.Diagnostics.Debug.WriteLine($"Server listening at {binding.LocalAddress}");
 
             // close server after everything is done
             await binding.Unbind();
@@ -59,7 +59,7 @@ namespace DocsExamples.Streams
 
             connections.RunForeach(connection =>
             {
-                Console.WriteLine($"New connection from: {connection.RemoteAddress}");
+                System.Diagnostics.Debug.WriteLine($"New connection from: {connection.RemoteAddress}");
 
                 var echo = Flow.Create<ByteString>()
                     .Via(Framing.Delimiter(

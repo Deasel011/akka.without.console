@@ -100,7 +100,7 @@ namespace DocsExamples.Persistence.PersistentActor
                         SaveSnapshot(_state);
                         break;
                     case "print":
-                        Console.WriteLine(_state);
+                        System.Diagnostics.Debug.WriteLine(_state);
                         break;
                 }
             }

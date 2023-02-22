@@ -570,7 +570,7 @@ namespace Akka.Actor
                         else
                         {
                             //TODO: find a way to get access to logger?
-                            Console.WriteLine("BUG: illegal Watch({0},{1}) for {2}", watch.Watchee, watch.Watcher, this);
+                            System.Diagnostics.Debug.WriteLine("BUG: illegal Watch({0},{1}) for {2}", watch.Watchee, watch.Watcher, this);
                         }
                     }
 
@@ -580,7 +580,7 @@ namespace Akka.Actor
                     RemoveWatcher(unwatch.Watcher);
                     break;
                 case Unwatch unwatch:
-                    Console.WriteLine("BUG: illegal Unwatch({0},{1}) for {2}", unwatch.Watchee, unwatch.Watcher, this);
+                    System.Diagnostics.Debug.WriteLine("BUG: illegal Unwatch({0},{1}) for {2}", unwatch.Watchee, unwatch.Watcher, this);
                     break;
             }
         }

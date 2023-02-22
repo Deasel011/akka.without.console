@@ -57,7 +57,7 @@ akka {
                         }
                         if (cmd == "/exit")
                         {
-                            Console.WriteLine("exiting");
+                            System.Diagnostics.Debug.WriteLine("exiting");
                             break;
                         }
                     }
@@ -84,27 +84,27 @@ akka {
         {
             Receive<ConnectRequest>(cr =>
             {
-                Console.WriteLine("Connecting....");
+                System.Diagnostics.Debug.WriteLine("Connecting....");
                 _server.Tell(cr);
             });
 
             Receive<ConnectResponse>(rsp =>
             {
-                Console.WriteLine("Connected!");
-                Console.WriteLine(rsp.Message);
+                System.Diagnostics.Debug.WriteLine("Connected!");
+                System.Diagnostics.Debug.WriteLine(rsp.Message);
             });
 
             Receive<NickRequest>(nr =>
             {
                 nr.OldUsername = _nick;
-                Console.WriteLine("Changing nick to {0}", nr.NewUsername);
+                System.Diagnostics.Debug.WriteLine("Changing nick to {0}", nr.NewUsername);
                 _nick = nr.NewUsername;
                 _server.Tell(nr);
             });
 
             Receive<NickResponse>(nrsp =>
             {
-                Console.WriteLine("{0} is now known as {1}", nrsp.OldUsername, nrsp.NewUsername);
+                System.Diagnostics.Debug.WriteLine("{0} is now known as {1}", nrsp.OldUsername, nrsp.NewUsername);
             });
 
             Receive<SayRequest>(sr =>
@@ -115,7 +115,7 @@ akka {
 
             Receive<SayResponse>(srsp =>
             {
-                Console.WriteLine("{0}: {1}", srsp.Username, srsp.Text);
+                System.Diagnostics.Debug.WriteLine("{0}: {1}", srsp.Username, srsp.Text);
             });
         }
     }

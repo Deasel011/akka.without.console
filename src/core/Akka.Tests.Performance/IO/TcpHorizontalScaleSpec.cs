@@ -143,7 +143,7 @@ namespace Akka.Tests.Performance.IO
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         public void Tcp_horizontal_scale_test()
         {
-            Console.WriteLine($"Running benchmark for {Timeout}");
+            System.Diagnostics.Debug.WriteLine($"Running benchmark for {Timeout}");
             var timeout = DateTime.UtcNow + Timeout;
             while (DateTime.UtcNow < timeout)
             {
@@ -151,7 +151,7 @@ namespace Akka.Tests.Performance.IO
                 _clients.Add(client);
                 
                 if(_clients.Count % 50 == 0)
-                    Console.WriteLine($"Actual clients count: {_clients.Count}");
+                    System.Diagnostics.Debug.WriteLine($"Actual clients count: {_clients.Count}");
                 Thread.Sleep(SleepInterval);
             }
         }

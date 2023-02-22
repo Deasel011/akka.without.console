@@ -28,7 +28,7 @@ namespace Akka.Streams.Tests
                 await Source
                     .From(text)
                     .Select(char.ToUpper) 
-                    .RunForeach(Console.WriteLine, materializer);
+                    .RunForeach(System.Diagnostics.Debug.WriteLine, materializer);
             }
         }
     }

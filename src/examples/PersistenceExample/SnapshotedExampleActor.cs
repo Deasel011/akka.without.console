@@ -27,7 +27,7 @@ namespace PersistenceExample
             {
                 case SnapshotOffer offer:
                     var s = (ExampleState) offer.Snapshot;
-                    Console.WriteLine("Offered state (from snapshot): " + s);
+                    System.Diagnostics.Debug.WriteLine("Offered state (from snapshot): " + s);
                     State = s;
                     return true;
                 
@@ -45,7 +45,7 @@ namespace PersistenceExample
             switch (message)
             {
                 case string str when str == "print":
-                    Console.WriteLine("Current actor's state: " + State);
+                    System.Diagnostics.Debug.WriteLine("Current actor's state: " + State);
                     return true;
                 case string str when str == "snap":
                     SaveSnapshot(State);

@@ -61,7 +61,7 @@ namespace Akka.Util
                     Console.BackgroundColor = backgroundColor.Value;
                 }
                 if (line)
-                    Console.WriteLine(message);
+                    System.Diagnostics.Debug.WriteLine(message);
                 else
                     Console.Write(message);
                 if (fg.HasValue)

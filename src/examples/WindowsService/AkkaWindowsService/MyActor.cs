@@ -15,7 +15,7 @@ namespace AkkaWindowsService
     {
         public MyActor()
         {
-            Receive<Joke>(j => Console.WriteLine(JsonSerializer.Serialize(j, options: new JsonSerializerOptions { WriteIndented = true })));
+            Receive<Joke>(j => System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(j, options: new JsonSerializerOptions { WriteIndented = true })));
         }
         public static Props Prop()
         {

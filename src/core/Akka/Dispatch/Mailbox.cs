@@ -565,7 +565,7 @@ namespace Akka.Dispatch
         public static void DebugPrint(string message, params object[] args)
         {
             var formattedMessage = args.Length == 0 ? message : string.Format(message, args);
-            Console.WriteLine("[MAILBOX][{0}][Thread {1:0000}] {2}", DateTime.Now.ToString("o"),
+            System.Diagnostics.Debug.WriteLine("[MAILBOX][{0}][Thread {1:0000}] {2}", DateTime.Now.ToString("o"),
                 Thread.CurrentThread.ManagedThreadId, formattedMessage);
         }
 

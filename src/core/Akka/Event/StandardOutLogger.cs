@@ -84,7 +84,7 @@ namespace Akka.Event
                     break;
                 
                 default:
-                    Console.WriteLine(message);
+                    System.Diagnostics.Debug.WriteLine(message);
                     break;
             }
         }
