@@ -21,6 +21,7 @@ using Akka.Util;
 using FluentAssertions.Extensions;
 using Reactive.Streams;
 using Xunit.Abstractions;
+using Diag = System.Diagnostics;
 
 namespace Akka.Streams.Tests
 {
@@ -289,7 +290,7 @@ namespace Akka.Streams.Tests
                 }
                 catch (Exception)
                 {
-                    System.Diagnostics.Debug.WriteLine(
+                    Diag.Debug.WriteLine(
                         $"Steps leading to failure:\n{string.Join("\n", _debugLog)}\nCurrentScript: {_currentScript.Debug()}");
                     throw;
                 }

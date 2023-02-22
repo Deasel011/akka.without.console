@@ -18,6 +18,9 @@ using Akka.Pattern;
 using Akka.Streams.Implementation.Fusing;
 using Akka.Util;
 using Akka.Util.Internal;
+using Diag = System.Diagnostics;
+
+
 
 namespace Akka.Streams.Implementation
 {
@@ -124,7 +127,7 @@ namespace Akka.Streams.Implementation
                 IDictionary<IModule, object> materializedValues)
             {
                 if(IsDebug)
-                    System.Diagnostics.Debug.WriteLine($"materializing {atomic}");
+                    Diag.Debug.WriteLine($"materializing {atomic}");
 
                 if (atomic is ISinkModule)
                 {

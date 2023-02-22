@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Streams.Dsl;
@@ -28,7 +29,7 @@ namespace Akka.Streams.Tests
                 await Source
                     .From(text)
                     .Select(char.ToUpper) 
-                    .RunForeach(System.Diagnostics.Debug.WriteLine, materializer);
+                    .RunForeach((c)=>Debug.WriteLine(c), materializer);
             }
         }
     }
