@@ -81,7 +81,7 @@ namespace PingPong
             System.Diagnostics.Debug.WriteLine("Messages sent/received: {0}  ({0:0e0})", GetTotalMessagesReceived(repeat));
             System.Diagnostics.Debug.WriteLine("Is Server GC:           {0}", GCSettings.IsServerGC);
             System.Diagnostics.Debug.WriteLine("Thread count:           {0}", Process.GetCurrentProcess().Threads.Count);
-            System.Diagnostics.Debug.WriteLine();
+            System.Diagnostics.Debug.WriteLine("");
 
 
             Console.Write("ActorBase    first start time: ");
@@ -98,21 +98,21 @@ namespace PingPong
                 System.Diagnostics.Debug.WriteLine(" ms");
             }
 
-            System.Diagnostics.Debug.WriteLine();
+            System.Diagnostics.Debug.WriteLine("");
 
             Console.Write("            ActorBase                          ReceiveActor");
             if (testAsync)
             {
                 Console.Write("                       AsyncActor");
             }
-            System.Diagnostics.Debug.WriteLine();
+            System.Diagnostics.Debug.WriteLine("");
 
             Console.Write("Throughput, Msgs/sec, Start [ms], Total [ms],  Msgs/sec, Start [ms], Total [ms]");
             if (testAsync)
             {
                 Console.Write(",  Msgs/sec, Start [ms], Total [ms]");
             }
-            System.Diagnostics.Debug.WriteLine();
+            System.Diagnostics.Debug.WriteLine("");
 
             for (var i = 0; i < timesToRun; i++)
             {
@@ -140,7 +140,7 @@ namespace PingPong
                         redCountAsyncActor = result3.Item3;
                     }
 
-                    System.Diagnostics.Debug.WriteLine();
+                    System.Diagnostics.Debug.WriteLine("");
                 }
             }
 

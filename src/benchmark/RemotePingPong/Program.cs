@@ -98,7 +98,7 @@ namespace RemotePingPong
             System.Diagnostics.Debug.WriteLine("Messages sent/received per client: {0}  ({0:0e0})", repeat*2);
             System.Diagnostics.Debug.WriteLine("Is Server GC:                      {0}", GCSettings.IsServerGC);
             System.Diagnostics.Debug.WriteLine("Thread count:                      {0}", Process.GetCurrentProcess().Threads.Count);
-            System.Diagnostics.Debug.WriteLine();
+            System.Diagnostics.Debug.WriteLine("");
 
             //Print tables
             System.Diagnostics.Debug.WriteLine("Num clients, Total [msg], Msgs/sec, Total [ms], Start Threads, End Threads");

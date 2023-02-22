@@ -123,7 +123,7 @@ namespace Akka.Cluster.Cpu.Benchmark
                 
                 System.Diagnostics.Debug.WriteLine($"{i}. [Warmup] {final}");
             }
-            System.Diagnostics.Debug.WriteLine();
+            System.Diagnostics.Debug.WriteLine("");
 
             // Start benchmark
             foreach (var i in Enumerable.Range(1, repeat))
